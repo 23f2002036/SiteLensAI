@@ -1,0 +1,7 @@
+[project]
+name = "sitelens-ai"
+version = "1.0.0"
+description = "Hazardous Construction Site Alert & RAG Orchestration System"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
