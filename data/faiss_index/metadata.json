@@ -1,0 +1,698 @@
+[
+  {
+    "content": "# Crane Operations Safety \u2014 Standard Operating Procedure",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_General_0",
+    "source_file": "crane_operations.md",
+    "section": "General"
+  },
+  {
+    "content": "Before any crane operation begins, the following checks must be completed: 1. **Daily Pre-Shift Inspection** (performed by qualified operator) - Inspect all wire ropes for kinking, crushing, bird-caging, or broken strands - Check hook, latch, and swivel for damage or deformation - Verify all safety devices are functional (anti-two-block, load moment indicator) - Inspect outriggers and stabilizers - Check hydraulic system for leaks - Verify boom condition and pin connections - Test all controls and emergency stops 2. **Ground Conditions** - Ensure ground can support crane and load weight - Use outrigger pads or mats on soft ground - Check for underground utilities before setup - Maintain level setup (max 1% grade)",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "Pre-Operation Inspection",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_Pre-Operation Inspection_0",
+    "source_file": "crane_operations.md",
+    "section": "Pre-Operation Inspection"
+  },
+  {
+    "content": "## Operating Procedures",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_General_0",
+    "source_file": "crane_operations.md",
+    "section": "General"
+  },
+  {
+    "content": "- Never exceed the rated capacity shown on the load chart - Account for all load components: rigging weight, hook block, headache ball - Reduce capacity for wind speeds above 20 mph - Consider dynamic loading factors for sudden starts/stops",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "Load Capacity",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_Load Capacity_0",
+    "source_file": "crane_operations.md",
+    "section": "Load Capacity"
+  },
+  {
+    "content": "- Only qualified riggers shall rig loads - Use tag lines to control load swing - All slings must be inspected before each use - Never wrap wire rope around a load \u2014 use proper slings - Ensure proper sling angles (minimum 60\u00b0 from horizontal) - Use softeners at sharp edges to prevent sling damage",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "Rigging Requirements",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_Rigging Requirements_0",
+    "source_file": "crane_operations.md",
+    "section": "Rigging Requirements"
+  },
+  {
+    "content": "- Establish a clear lift zone with barricades and signage - No personnel under suspended loads at any time - Signal person required when operator cannot see load - Use standard hand signals or radio communication - Crane operator has authority to stop any lift for safety concerns",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "Lift Zone Safety",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_Lift Zone Safety_0",
+    "source_file": "crane_operations.md",
+    "section": "Lift Zone Safety"
+  },
+  {
+    "content": "- Maintain minimum clearance of 20 feet from power lines up to 350 kV - Contact utility company for de-energization if closer work is needed - Use a dedicated spotter when working near power lines - Ground the crane if contact is possible",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "Overhead Power Lines",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_Overhead Power Lines_0",
+    "source_file": "crane_operations.md",
+    "section": "Overhead Power Lines"
+  },
+  {
+    "content": "## Emergency Procedures",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_General_0",
+    "source_file": "crane_operations.md",
+    "section": "General"
+  },
+  {
+    "content": "1. Evacuate the area immediately 2. Call emergency services (911) 3. Do not attempt to re-right or recover the crane 4. Secure the area with a 100-foot perimeter 5. Report to safety officer and site supervisor",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "Load Drop or Crane Tip",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_Load Drop or Crane Tip_0",
+    "source_file": "crane_operations.md",
+    "section": "Load Drop or Crane Tip"
+  },
+  {
+    "content": "1. Stop all crane motion immediately 2. Lower the load block slowly if possible 3. Inspect wire rope and anti-two-block device 4. Do not resume operations until repaired and re-inspected",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "Two-Block Condition",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_Two-Block Condition_0",
+    "source_file": "crane_operations.md",
+    "section": "Two-Block Condition"
+  },
+  {
+    "content": "- Cease operations when wind speed exceeds 30 mph - Secure boom in lowest possible position - Retract and secure the crane if wind exceeds 40 mph - Monitor weather conditions continuously",
+    "metadata": {
+      "source": "crane_operations.md",
+      "section": "High Wind Shutdown",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "crane_operations_High Wind Shutdown_0",
+    "source_file": "crane_operations.md",
+    "section": "High Wind Shutdown"
+  },
+  {
+    "content": "# Electrical Safety \u2014 Construction Site SOP",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_General_0",
+    "source_file": "electrical_safety.md",
+    "section": "General"
+  },
+  {
+    "content": "Electrical hazards on construction sites include: - Contact with overhead power lines - Contact with energized equipment or circuits - Damaged or improper wiring and extension cords - Wet conditions increasing conductivity - Lack of proper grounding - Arc flash and arc blast",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "Hazard Identification",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_Hazard Identification_0",
+    "source_file": "electrical_safety.md",
+    "section": "Hazard Identification"
+  },
+  {
+    "content": "1. Only qualified electricians shall work on electrical systems 2. Treat all wires as energized until verified by qualified person 3. Use lockout/tagout (LOTO) procedures before any electrical work 4. Maintain safe distances from power lines (minimum 10 feet for up to 50 kV) 5. Use Ground Fault Circuit Interrupters (GFCIs) on all temporary wiring 6. Never use damaged cords, plugs, or receptacles 7. Keep electrical equipment away from water and wet conditions 8. Ensure proper grounding of all tools and equipment",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "General Electrical Safety Rules",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_General Electrical Safety Rules_0",
+    "source_file": "electrical_safety.md",
+    "section": "General Electrical Safety Rules"
+  },
+  {
+    "content": "## Lockout/Tagout (LOTO) Procedure",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_General_0",
+    "source_file": "electrical_safety.md",
+    "section": "General"
+  },
+  {
+    "content": "1. Identify all energy sources that must be controlled 2. Notify all affected employees of the shutdown 3. Shut down the equipment using normal stopping procedure 4. Apply lockout/tagout devices to each energy-isolating device 5. Release or restrain all stored energy (capacitors, springs, hydraulics) 6. Verify zero energy state using appropriate test equipment 7. Perform the work",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "Before Work Begins",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_Before Work Begins_0",
+    "source_file": "electrical_safety.md",
+    "section": "Before Work Begins"
+  },
+  {
+    "content": "1. Inspect the work area to ensure all tools are removed 2. Verify all employees are clear of the equipment 3. Remove lockout/tagout devices (only by the person who applied them) 4. Re-energize equipment following proper sequence 5. Test equipment operation 6. Notify all affected employees that work is complete",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "Restoring Equipment",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_Restoring Equipment_0",
+    "source_file": "electrical_safety.md",
+    "section": "Restoring Equipment"
+  },
+  {
+    "content": "## Emergency Response \u2014 Electrical Contact",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_General_0",
+    "source_file": "electrical_safety.md",
+    "section": "General"
+  },
+  {
+    "content": "1. DO NOT touch the victim if they are still in contact with the source 2. Call 911 immediately 3. Disconnect power source if safely possible 4. If power cannot be disconnected, use non-conductive material to separate victim from source 5. Begin CPR if victim is not breathing and has no pulse 6. Treat for shock \u2014 keep victim warm and comfortable 7. Do not move victim unless there is immediate danger",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "Worker Contact with Energized Source",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_Worker Contact with Energized Source_0",
+    "source_file": "electrical_safety.md",
+    "section": "Worker Contact with Energized Source"
+  },
+  {
+    "content": "1. Stay at least 35 feet away from downed lines 2. Assume all downed lines are energized 3. Call utility company and 911 immediately 4. Keep all personnel and equipment away 5. If a vehicle is in contact with a downed line, occupants should remain inside unless there is fire 6. If you must exit a vehicle near a downed line, jump clear without touching the vehicle and ground simultaneously",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "Downed Power Line",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_Downed Power Line_0",
+    "source_file": "electrical_safety.md",
+    "section": "Downed Power Line"
+  },
+  {
+    "content": "- All temporary wiring must be protected from damage - Extension cords must be rated for the application - Multi-plug adapters are not permitted - Temporary lighting must be protected with guards - All circuits must have GFCI protection - Inspect all temporary wiring daily",
+    "metadata": {
+      "source": "electrical_safety.md",
+      "section": "Temporary Wiring Requirements",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "electrical_safety_Temporary Wiring Requirements_0",
+    "source_file": "electrical_safety.md",
+    "section": "Temporary Wiring Requirements"
+  },
+  {
+    "content": "# OSHA Fall Protection Standards \u2014 29 CFR 1926 Subpart M",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_General_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "General"
+  },
+  {
+    "content": "Each employee on a walking/working surface with an unprotected side or edge which is 6 feet (1.8 m) or more above a lower level shall be protected from falling by the use of guardrail systems, safety net systems, or personal fall arrest systems. Workers on construction sites must be provided fall protection at elevations of 6 feet or more. This includes work on scaffolds, elevated platforms, rooftops, open-sided floors, and near excavations.",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "General Requirements (1926.501)",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_General Requirements (1926.501)_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "General Requirements (1926.501)"
+  },
+  {
+    "content": "## Fall Protection Systems (1926.502)",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_General_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "General"
+  },
+  {
+    "content": "- Top edge height: 42 inches (\u00b13 inches) above walking/working level - Midrails installed at a height midway between the top edge and walking/working surface - Must withstand 200 pounds of force applied in any outward or downward direction",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "Guardrail Systems",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_Guardrail Systems_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "Guardrail Systems"
+  },
+  {
+    "content": "- Full body harness connected to anchorage point - Anchorage must support at least 5,000 pounds per worker - Total fall distance plus deceleration distance must not exceed the available free fall distance - Self-retracting lifelines must limit free fall to 2 feet or less - Harness must be inspected before each use",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "Personal Fall Arrest Systems",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_Personal Fall Arrest Systems_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "Personal Fall Arrest Systems"
+  },
+  {
+    "content": "- Installed as close as practicable under the walking/working surface - Maximum distance below: 30 feet - Must extend outward from the outermost projection of the work surface",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "Safety Net Systems",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_Safety Net Systems_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "Safety Net Systems"
+  },
+  {
+    "content": "Employers must provide training for each employee who might be exposed to fall hazards. Training must include: 1. Nature of fall hazards in the work area 2. Correct procedures for erecting, maintaining, disassembling, and inspecting fall protection systems 3. Use and operation of guardrail systems, personal fall arrest systems, safety net systems, and other protection methods 4. Role of each employee in the safety monitoring system",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "Training Requirements (1926.503)",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_Training Requirements (1926.503)_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "Training Requirements (1926.503)"
+  },
+  {
+    "content": "## Common Fall Hazards on Construction Sites",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_General_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "General"
+  },
+  {
+    "content": "Workers at leading edges (the edge of a floor, roof, or formwork that changes location as additional sections are placed) must use fall protection.",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "Leading Edges",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_Leading Edges_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "Leading Edges"
+  },
+  {
+    "content": "Floor holes through which a person can fall must be guarded by a cover or guardrail system. Wall openings from which there is a drop of more than 6 feet must be guarded.",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "Holes and Openings",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_Holes and Openings_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "Holes and Openings"
+  },
+  {
+    "content": "Fall protection is required for scaffolds more than 10 feet above a lower level. Guardrails and/or personal fall arrest systems must be used.",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "Scaffolding",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_Scaffolding_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "Scaffolding"
+  },
+  {
+    "content": "Workers on low-slope roofs with unprotected sides and edges 6 feet or more above lower levels must have fall protection. Warning line systems may be used in combination with other systems.",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "Roofing Work",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_Roofing Work_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "Roofing Work"
+  },
+  {
+    "content": "In the event of a fall: 1. Activate emergency response immediately (call 911) 2. Do NOT move the fallen worker unless there is immediate danger 3. Provide first aid while waiting for emergency services 4. Secure the area to prevent additional falls 5. Report the incident to the site supervisor and safety officer 6. Document the incident including conditions, equipment used, and witnesses",
+    "metadata": {
+      "source": "osha_fall_protection.md",
+      "section": "Emergency Response",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "osha_fall_protection_Emergency Response_0",
+    "source_file": "osha_fall_protection.md",
+    "section": "Emergency Response"
+  },
+  {
+    "content": "# Personal Protective Equipment (PPE) Requirements \u2014 Construction Sites",
+    "metadata": {
+      "source": "ppe_requirements.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "ppe_requirements_General_0",
+    "source_file": "ppe_requirements.md",
+    "section": "General"
+  },
+  {
+    "content": "Every worker entering a construction site must wear the following minimum PPE at all times: 1. **Hard Hat (ANSI Z89.1 Class E or G)** - Must be worn at all times on the construction site - Replace immediately if cracked, dented, or damaged - Do not drill holes or modify the shell - Replace every 5 years or per manufacturer recommendation 2. **Safety Glasses (ANSI Z87.1)** - Impact-resistant lenses required for all site work - Side shields required in areas with flying debris - Prescription safety glasses must meet ANSI Z87.1 standards 3. **High-Visibility Vest (ANSI/ISEA 107 Class 2 or 3)** - Required in all areas where vehicle or equipment traffic is present - Class 3 required for roadwork and low-visibility conditions - Must be clean and reflective strips must be visible 4. **Safety Boots (ASTM F2413)** - Steel-toe or composite-toe boots required - Puncture-resistant sole - Must be laced and in good condition - Electrical hazard (EH) rated boots required near electrical work 5. **Work Gloves** - Appropriate to the task being performed - Cut-resistant gloves for handling sharp materials - Chemical-resistant gloves for handling hazardous substances - Insulated gloves for electrical work",
+    "metadata": {
+      "source": "ppe_requirements.md",
+      "section": "Mandatory PPE for All Workers",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "ppe_requirements_Mandatory PPE for All Workers_0",
+    "source_file": "ppe_requirements.md",
+    "section": "Mandatory PPE for All Workers"
+  },
+  {
+    "content": "## Task-Specific PPE",
+    "metadata": {
+      "source": "ppe_requirements.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "ppe_requirements_General_0",
+    "source_file": "ppe_requirements.md",
+    "section": "General"
+  },
+  {
+    "content": "- Welding helmet with appropriate shade lens (minimum Shade 10 for arc welding) - Fire-resistant clothing - Welding gloves (leather) - Steel-toe boots",
+    "metadata": {
+      "source": "ppe_requirements.md",
+      "section": "Welding Operations",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "ppe_requirements_Welding Operations_0",
+    "source_file": "ppe_requirements.md",
+    "section": "Welding Operations"
+  },
+  {
+    "content": "- Full body harness (ANSI Z359.11) - Lanyard with shock absorber - Self-retracting lifeline when applicable - Hard hat with chin strap",
+    "metadata": {
+      "source": "ppe_requirements.md",
+      "section": "Working at Heights",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "ppe_requirements_Working at Heights_0",
+    "source_file": "ppe_requirements.md",
+    "section": "Working at Heights"
+  },
+  {
+    "content": "- Rubber boots (waterproof) - Chemical-resistant gloves - Long-sleeve shirt to prevent concrete burns - Safety glasses or goggles",
+    "metadata": {
+      "source": "ppe_requirements.md",
+      "section": "Concrete Work",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "ppe_requirements_Concrete Work_0",
+    "source_file": "ppe_requirements.md",
+    "section": "Concrete Work"
+  },
+  {
+    "content": "- Full-face respirator (where dust/debris is present) - Hearing protection (above 85 dB) - Heavy-duty cut-resistant gloves - Full body protection",
+    "metadata": {
+      "source": "ppe_requirements.md",
+      "section": "Demolition",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "ppe_requirements_Demolition_0",
+    "source_file": "ppe_requirements.md",
+    "section": "Demolition"
+  },
+  {
+    "content": "Before each shift: 1. Inspect all PPE for visible damage 2. Check harness webbing for cuts, fraying, or chemical damage 3. Verify hard hat shell integrity (no cracks or UV damage) 4. Ensure safety glasses lenses are clean and unscratched 5. Check boot soles for wear and puncture resistance 6. Report any damaged PPE to supervisor immediately 7. Do NOT use damaged PPE under any circumstances",
+    "metadata": {
+      "source": "ppe_requirements.md",
+      "section": "PPE Inspection Protocol",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "ppe_requirements_PPE Inspection Protocol_0",
+    "source_file": "ppe_requirements.md",
+    "section": "PPE Inspection Protocol"
+  },
+  {
+    "content": "- First violation: Verbal warning and immediate correction - Second violation: Written warning and mandatory safety retraining - Third violation: Suspension from site pending safety review - Willful violations: Immediate removal from site",
+    "metadata": {
+      "source": "ppe_requirements.md",
+      "section": "Non-Compliance Consequences",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "ppe_requirements_Non-Compliance Consequences_0",
+    "source_file": "ppe_requirements.md",
+    "section": "Non-Compliance Consequences"
+  },
+  {
+    "content": "# Trench and Excavation Safety \u2014 Standard Operating Procedure",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_General_0",
+    "source_file": "trench_excavation.md",
+    "section": "General"
+  },
+  {
+    "content": "This SOP applies to all excavation and trenching operations where workers may enter trenches or excavations deeper than 5 feet, or any depth where hazardous ground conditions exist.",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Scope",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Scope_0",
+    "source_file": "trench_excavation.md",
+    "section": "Scope"
+  },
+  {
+    "content": "- Cave-ins (the leading cause of fatality in trench operations) - Falls into trenches - Hazardous atmospheres (methane, hydrogen sulfide, low oxygen) - Water accumulation and flooding - Contact with underground utilities (gas, electric, water, sewer) - Falling loads and equipment",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Hazards",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Hazards_0",
+    "source_file": "trench_excavation.md",
+    "section": "Hazards"
+  },
+  {
+    "content": "## Pre-Excavation Requirements",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_General_0",
+    "source_file": "trench_excavation.md",
+    "section": "General"
+  },
+  {
+    "content": "1. Contact the local utility locator service (811) at least 48 hours before digging 2. Hand-dig within 24 inches of marked utility locations 3. Protect exposed utilities from damage during excavation 4. Maintain safe distances from all marked utilities",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Utility Location",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Utility Location_0",
+    "source_file": "trench_excavation.md",
+    "section": "Utility Location"
+  },
+  {
+    "content": "A competent person must classify the soil before excavation begins: - **Type A**: Most stable (cohesive soils like clay), 1.5H:1V slope - **Type B**: Medium stability (silt, sandy loam), 1H:1V slope - **Type C**: Least stable (gravel, sand, submerged soil), 1.5H:1V slope",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Soil Classification",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Soil Classification_0",
+    "source_file": "trench_excavation.md",
+    "section": "Soil Classification"
+  },
+  {
+    "content": "Trenches 5 feet or deeper require one of the following: 1. **Sloping**: Cutting back the trench wall at an angle 2. **Shoring**: Installing support systems (hydraulic, timber, or mechanical) 3. **Shielding**: Using trench boxes or shields 4. **Benching**: Creating steps in the trench walls (not allowed in Type C soil)",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Protective Systems",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Protective Systems_0",
+    "source_file": "trench_excavation.md",
+    "section": "Protective Systems"
+  },
+  {
+    "content": "## During Excavation",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_General_0",
+    "source_file": "trench_excavation.md",
+    "section": "General"
+  },
+  {
+    "content": "A competent person must inspect the excavation: - At the start of each shift - After every rainstorm or water intrusion - After any event that could affect soil stability - Continuously during active excavation near workers",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Daily Inspection",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Daily Inspection_0",
+    "source_file": "trench_excavation.md",
+    "section": "Daily Inspection"
+  },
+  {
+    "content": "- Provide a ladder, ramp, or stairway in trenches 4 feet or deeper - Access points must be within 25 feet of all workers - Structural ramps must be designed by a qualified person",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Access and Egress",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Access and Egress_0",
+    "source_file": "trench_excavation.md",
+    "section": "Access and Egress"
+  },
+  {
+    "content": "- Keep spoil piles at least 2 feet from the trench edge - Ensure no equipment or materials are placed near the edge - Use barriers to prevent spoils from falling back into the trench",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Spoil Pile Management",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Spoil Pile Management_0",
+    "source_file": "trench_excavation.md",
+    "section": "Spoil Pile Management"
+  },
+  {
+    "content": "- Remove standing water before workers enter - Use dewatering systems if water accumulates - Workers must not enter flooded trenches - Monitor weather conditions for potential flash flooding",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Water Hazards",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Water Hazards_0",
+    "source_file": "trench_excavation.md",
+    "section": "Water Hazards"
+  },
+  {
+    "content": "## Emergency Procedures",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "General",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_General_0",
+    "source_file": "trench_excavation.md",
+    "section": "General"
+  },
+  {
+    "content": "1. Call 911 immediately 2. Do NOT enter the collapsed trench 3. Attempt to locate the buried worker without entering 4. Begin rescue operations only with proper equipment and training 5. Notify site supervisor and safety officer 6. Preserve the scene for investigation",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Cave-in or Collapse",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Cave-in or Collapse_0",
+    "source_file": "trench_excavation.md",
+    "section": "Cave-in or Collapse"
+  },
+  {
+    "content": "1. Evacuate the trench immediately 2. Do not re-enter without atmospheric testing 3. Ventilate the trench before re-entry 4. Use continuous atmospheric monitoring 5. Ensure rescue equipment is available before entry into deep trenches",
+    "metadata": {
+      "source": "trench_excavation.md",
+      "section": "Hazardous Atmosphere",
+      "chunk_index": 0,
+      "total_chunks": 1
+    },
+    "chunk_id": "trench_excavation_Hazardous Atmosphere_0",
+    "source_file": "trench_excavation.md",
+    "section": "Hazardous Atmosphere"
+  }
+]

@@ -1,0 +1,37 @@
+# FastAPI Core & Web Server
+fastapi>=0.104.0
+uvicorn>=0.24.0
+websockets>=12.0
+python-dotenv>=1.0.0
+pydantic-settings>=2.0.0
+httpx>=0.25.0
+
+# Database & ORM
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+
+# Storage & Utilities
+redis>=4.5.0
+python-dotenv>=1.0.0
+
+# VLM (HuggingFace fallback)
+torch>=2.0.0
+transformers>=4.40.0
+Pillow>=10.0.0
+
+# RAG Pipeline
+sentence-transformers>=2.2.0
+faiss-cpu>=1.7.4
+
+# Database
+aiosqlite>=0.19.0
+
+# Utilities
+python-multipart>=0.0.6
+orjson>=3.9.0
+
+# Optional: Supabase (uncomment if using VECTOR_BACKEND=supabase)
+# supabase>=2.0.0
+
+# Optional: YOLO (uncomment if using YOLO_ENABLED=true)
+# ultralytics>=8.1.0

@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>SiteLens AI — Construction Hazard Detection</title>
+    <meta name="description" content="Real-time construction site hazard detection with AI-powered safety alerts and SOP guidance">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Root ─────────────────────────────────────── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2332;
+            --bg-card-hover: #1f2b3d;
+            --bg-elevated: #243044;
+
+            --border-subtle: rgba(255,255,255,0.06);
+            --border-accent: rgba(251,146,60,0.3);
+
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+
+            --accent-orange: #fb923c;
+            --accent-orange-glow: rgba(251,146,60,0.15);
+            --accent-red: #ef4444;
+            --accent-red-glow: rgba(239,68,68,0.15);
+            --accent-green: #22c55e;
+            --accent-green-glow: rgba(34,197,94,0.15);
+            --accent-yellow: #eab308;
+            --accent-yellow-glow: rgba(234,179,8,0.15);
+            --accent-blue: #3b82f6;
+            --accent-blue-glow: rgba(59,130,246,0.15);
+            --accent-cyan: #06b6d4;
+
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-glow-orange: 0 0 30px rgba(251,146,60,0.2);
+            --shadow-glow-red: 0 0 30px rgba(239,68,68,0.3);
+
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Background Grid Effect ───────────────────────────── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(251,146,60,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(239,68,68,0.03) 0%, transparent 50%),
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Header ───────────────────────────────────────────── */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: var(--shadow-glow-orange);
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text span {
+            background: linear-gradient(135deg, var(--accent-orange), #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .connection-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .connection-badge.connected {
+            background: var(--accent-green-glow);
+            color: var(--accent-green);
+            border: 1px solid rgba(34,197,94,0.2);
+        }
+
+        .connection-badge.disconnected {
+            background: var(--accent-red-glow);
+            color: var(--accent-red);
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+
+        .connection-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .connection-badge.connected .connection-dot {
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 currentColor; }
+            50% { opacity: 0.7; box-shadow: 0 0 0 4px transparent; }
+        }
+
+        .backend-badge {
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-elevated);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6,182,212,0.2);
+        }
+
+        /* ── Main Layout ──────────────────────────────────────── */
+        .main {
+            position: relative;
+            z-index: 1;
+            max-width: 1480px;
+            margin: 0 auto;
+            padding: 20px 24px 40px;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            grid-template-rows: auto auto 1fr;
+            gap: 20px;
+        }
+
+        /* ── Card base ────────────────────────────────────────── */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            transition: border-color var(--transition);
+        }
+
+        .card:hover { border-color: rgba(255,255,255,0.1); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title .icon { font-size: 1rem; }
+
+        .card-body { padding: 20px; }
+
+        /* ── Video Section ────────────────────────────────────── */
+        .video-section {
+            grid-column: 1;
+            grid-row: 1 / 3;
+        }
+
+        .video-wrapper {
+            position: relative;
+            background: #000;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        #cameraFeed {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        #canvasOverlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .video-overlay-badges {
+            position: absolute;
+            top: 12px; left: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .video-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            backdrop-filter: blur(8px);
+        }
+
+        .video-badge.live {
+            background: rgba(239,68,68,0.8);
+            color: white;
+            animation: live-pulse 1.5s infinite;
+        }
+
+        @keyframes live-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .video-badge.fps {
+            background: rgba(0,0,0,0.6);
+            color: var(--text-secondary);
+        }
+
+        .video-controls {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-orange), #ea580c);
+            color: white;
+            box-shadow: 0 4px 16px rgba(251,146,60,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(251,146,60,0.4);
+        }
+
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-primary:disabled {
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--bg-elevated);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+        .btn-icon {
+            width: 40px; height: 40px;
+            padding: 0;
+            border-radius: 10px;
+        }
+
+        /* ── Severity Banner ──────────────────────────────────── */
+        .severity-banner {
+            grid-column: 1 / -1;
+            border-radius: var(--radius);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .severity-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .severity-banner.none {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .severity-banner.info {
+            background: var(--accent-blue-glow);
+            border: 1px solid rgba(59,130,246,0.3);
+        }
+
+        .severity-banner.warning {
+            background: var(--accent-yellow-glow);
+            border: 1px solid rgba(234,179,8,0.3);
+            animation: glow-warning 2s infinite;
+        }
+
+        .severity-banner.critical {
+            background: var(--accent-red-glow);
+            border: 1px solid rgba(239,68,68,0.4);
+            animation: glow-critical 1s infinite;
+            box-shadow: var(--shadow-glow-red);
+        }
+
+        @keyframes glow-warning {
+            0%, 100% { box-shadow: 0 0 20px rgba(234,179,8,0.1); }
+            50% { box-shadow: 0 0 40px rgba(234,179,8,0.2); }
+        }
+
+        @keyframes glow-critical {
+            0%, 100% { box-shadow: 0 0 20px rgba(239,68,68,0.2); }
+            50% { box-shadow: 0 0 50px rgba(239,68,68,0.4); }
+        }
+
+        .severity-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .severity-banner.none .severity-icon { background: var(--bg-elevated); }
+        .severity-banner.info .severity-icon { background: rgba(59,130,246,0.2); }
+        .severity-banner.warning .severity-icon { background: rgba(234,179,8,0.2); }
+        .severity-banner.critical .severity-icon { background: rgba(239,68,68,0.2); }
+
+        .severity-text h2 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .severity-text p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        .severity-banner.critical .severity-text h2 { color: var(--accent-red); }
+        .severity-banner.warning .severity-text h2 { color: var(--accent-yellow); }
+        .severity-banner.info .severity-text h2 { color: var(--accent-blue); }
+
+        .severity-meta {
+            margin-left: auto;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .severity-meta .time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .severity-meta .proc-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-top: 2px;
+        }
+
+        /* ── Right Sidebar ────────────────────────────────────── */
+        .sidebar {
+            grid-column: 2;
+            grid-row: 1 / 4;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Audio Alert Panel */
+        .audio-panel .card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .audio-text {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--text-primary);
+            min-height: 48px;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* HUD Preview */
+        .hud-preview {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(251,146,60,0.2);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            line-height: 1.7;
+            color: var(--accent-orange);
+            min-height: 80px;
+            white-space: pre-line;
+        }
+
+        /* Hazard List */
+        .hazard-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .hazard-list::-webkit-scrollbar { width: 4px; }
+        .hazard-list::-webkit-scrollbar-track { background: transparent; }
+        .hazard-list::-webkit-scrollbar-thumb {
+            background: var(--bg-elevated);
+            border-radius: 4px;
+        }
+
+        .hazard-item {
+            padding: 12px 14px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--accent-orange);
+            transition: all var(--transition);
+        }
+
+        .hazard-item:hover {
+            background: var(--bg-elevated);
+            transform: translateX(2px);
+        }
+
+        .hazard-item.critical { border-left-color: var(--accent-red); }
+        .hazard-item.warning { border-left-color: var(--accent-yellow); }
+        .hazard-item.info { border-left-color: var(--accent-blue); }
+
+        .hazard-item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .hazard-item-type {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .hazard-item-severity {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .hazard-item-severity.critical {
+            background: var(--accent-red-glow);
+            color: var(--accent-red);
+        }
+
+        .hazard-item-severity.warning {
+            background: var(--accent-yellow-glow);
+            color: var(--accent-yellow);
+        }
+
+        .hazard-item-severity.info {
+            background: var(--accent-blue-glow);
+            color: var(--accent-blue);
+        }
+
+        .hazard-item-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .hazard-item-location {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* SOP Reference */
+        .sop-panel .card-body { padding: 16px 20px; }
+
+        .sop-content {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            white-space: pre-line;
+        }
+
+        .sop-doc-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+            transition: all var(--transition);
+        }
+
+        .sop-doc-chip:hover {
+            border-color: rgba(251,146,60,0.3);
+            color: var(--accent-orange);
+            background: var(--accent-orange-glow);
+        }
+
+
+        /* Stats Row */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 4px;
+        }
+
+        /* ── Alert History ────────────────────────────────────── */
+        .history-section {
+            grid-column: 1;
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            transition: background var(--transition);
+        }
+
+        .history-item:hover { background: var(--bg-elevated); }
+
+        .history-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .history-dot.critical { background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red); }
+        .history-dot.warning { background: var(--accent-yellow); }
+        .history-dot.info { background: var(--accent-blue); }
+        .history-dot.none { background: var(--text-muted); }
+
+        .history-content { flex: 1; min-width: 0; }
+
+        .history-content .title {
+            font-size: 0.78rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .history-content .desc {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .history-time {
+            font-size: 0.68rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        /* ── Empty state ──────────────────────────────────────── */
+        .empty-state {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-muted);
+        }
+
+        .empty-state .icon { font-size: 2rem; margin-bottom: 8px; }
+
+        .empty-state p {
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        /* ── Loading spinner ──────────────────────────────────── */
+        .spinner {
+            width: 24px; height: 24px;
+            border: 3px solid var(--bg-elevated);
+            border-top-color: var(--accent-orange);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ── Responsive ───────────────────────────────────────── */
+        @media (max-width: 1100px) {
+            .main {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .sidebar {
+                grid-column: 1;
+                grid-row: auto;
+            }
+
+            .video-section { grid-row: auto; }
+        }
+
+        @media (max-width: 640px) {
+            .header { padding: 0 16px; }
+            .main { padding: 12px 16px; }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* ── Worker Query Panel ────────────────────────────────── */
+        .query-panel {
+            padding: 14px 20px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: var(--bg-secondary);
+        }
+
+        .query-input-wrap {
+            position: relative;
+            flex: 1;
+        }
+
+        .query-input-wrap .query-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+
+        #workerQueryInput {
+            width: 100%;
+            padding: 10px 14px 10px 38px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.86rem;
+            outline: none;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+
+        #workerQueryInput::placeholder { color: var(--text-muted); }
+
+        #workerQueryInput:focus {
+            border-color: rgba(251,146,60,0.5);
+            box-shadow: 0 0 0 3px rgba(251,146,60,0.08);
+        }
+
+        .query-clear-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: none;
+            line-height: 1;
+        }
+
+        .query-clear-btn:hover { color: var(--text-primary); background: var(--bg-elevated); }
+
+        .query-active-badge {
+            display: none;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: rgba(251,146,60,0.12);
+            color: var(--accent-orange);
+            border: 1px solid rgba(251,146,60,0.25);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ── Scan animation ───────────────────────────────────────── */
+        .scanning .video-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(251,146,60,0.15) 50%,
+                transparent 100%
+            );
+            animation: scan-line 2s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scan-line {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Header ─────────────────────────────────────────────── -->
+    <header class="header" id="appHeader">
+        <div class="header-left">
+            <div class="logo-icon">🔍</div>
+            <div class="logo-text">SiteLens <span>AI</span></div>
+        </div>
+        <div class="header-right">
+            <div class="backend-badge" id="backendBadge">VLM: --</div>
+            <div class="connection-badge disconnected" id="connectionBadge">
+                <div class="connection-dot"></div>
+                <span id="connectionText">Offline</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── Main Layout ────────────────────────────────────────── -->
+    <main class="main" id="mainLayout">
+
+        <!-- Severity Banner -->
+        <div class="severity-banner none" id="severityBanner">
+            <div class="severity-icon" id="severityIcon">🛡️</div>
+            <div class="severity-text">
+                <h2 id="severityTitle">System Ready</h2>
+                <p id="severityDesc">Start camera feed and scan to begin hazard detection</p>
+            </div>
+            <div class="severity-meta">
+                <div class="time" id="severityTime">--:--:--</div>
+                <div class="proc-time" id="procTime"></div>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="card video-section" id="videoSection">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="icon">📹</span> Live Camera Feed
+                </div>
+                <div id="frameCounter" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-muted);">
+                    Frame: 0
+                </div>
+            </div>
+            <div class="card-body" style="padding:12px;">
+                <div class="video-wrapper" id="videoWrapper">
+                    <video id="cameraFeed" autoplay playsinline muted></video>
+                    <canvas id="canvasOverlay"></canvas>
+                    <div class="video-overlay-badges">
+                        <div class="video-badge live" id="liveBadge" style="display:none;">● LIVE</div>
+                        <div class="video-badge fps" id="fpsBadge">-- FPS</div>
+                    </div>
+                </div>
+                <div class="video-controls">
+                    <button class="btn btn-primary" id="startCameraBtn" onclick="toggleCamera()">
+                        📷 Start Camera
+                    </button>
+                    <button class="btn btn-primary" id="scanBtn" onclick="singleScan()" disabled>
+                        🔍 Scan Now
+                    </button>
+                    <button class="btn btn-secondary btn-icon" id="autoScanBtn" onclick="toggleAutoScan()" disabled title="Toggle Auto-Scan">
+                        ⚡
+                    </button>
+                    <div style="flex:1;"></div>
+                    <button class="btn btn-secondary btn-icon" onclick="toggleFullscreen()" title="Fullscreen">
+                        ⛶
+                    </button>
+                </div>
+
+                <!-- Worker Query Panel -->
+                <div class="query-panel">
+                    <div class="query-input-wrap">
+                        <span class="query-icon">💬</span>
+                        <input
+                            type="text"
+                            id="workerQueryInput"
+                            placeholder="Ask the AI about this scene… e.g. 'Is this crane rigged correctly?'"
+                            oninput="onQueryInput()"
+                            onkeydown="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); singleScan(); }"
+                        />
+                        <button class="query-clear-btn" id="queryClearBtn" onclick="clearQuery()" title="Clear query">✕</button>
+                    </div>
+                    <span class="query-active-badge" id="queryActiveBadge">⚡ Query Active</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene Analysis & Decision Engine Card -->
+        <div class="card" id="detailsSection" style="grid-column: 1;">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="icon">🧠</span> VLM Scene Analysis & Decision Engine
+                </div>
+                <div id="decisionBadge" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:4px 10px;border-radius:6px;background:var(--bg-elevated);color:var(--accent-cyan);border:1px solid rgba(6,182,212,0.2);font-weight:600;">
+                    DECISION: --
+                </div>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:14px;">
+                <div>
+                    <div style="font-size:0.72rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">VLM Scene Description</div>
+                    <div id="sceneDescText" style="font-size:0.88rem;color:var(--text-primary);line-height:1.5;background:var(--bg-elevated);padding:12px 16px;border-radius:8px;border:1px solid var(--border-subtle);">
+                        <span style="color:var(--text-muted);font-style:italic;">No scene description available yet. Start camera and click 'Scan Now'.</span>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size:0.72rem;font-weight:600;color:var(--accent-amber);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Raw VLM Reasoning & Thought Output (&lt;think&gt;)</div>
+                    <pre id="rawModelResponseText" style="margin:0;font-size:0.82rem;color:#fde047;background:#0d1117;padding:14px;border-radius:8px;border:1px solid rgba(250,204,21,0.3);font-family:'JetBrains Mono',monospace;line-height:1.45;white-space:pre-wrap;word-break:break-word;max-height:280px;overflow-y:auto;"><span style="color:var(--text-muted);font-style:italic;">Raw &lt;think&gt; reasoning and analysis text will appear here...</span></pre>
+                </div>
+                <div>
+                    <div style="font-size:0.72rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Rule Engine Reasoning & Latency</div>
+                    <div id="decisionReasoningText" style="font-size:0.85rem;color:var(--accent-amber);background:var(--bg-elevated);padding:12px 16px;border-radius:8px;border:1px solid var(--border-subtle);font-family:'JetBrains Mono',monospace;line-height:1.4;">
+                        <span style="color:var(--text-muted);font-style:italic;">Awaiting analysis...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Raw API Response (JSON Viewer) Card -->
+        <div class="card" id="jsonSection" style="grid-column: 1;">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="icon">💻</span> Full API Response (Raw JSON)
+                </div>
+                <div style="display:flex;gap:8px;">
+                    <button class="btn btn-secondary" onclick="copyRawJson()" style="padding:4px 12px;font-size:0.7rem;height:28px;">📋 Copy JSON</button>
+                    <button class="btn btn-secondary" onclick="toggleJsonView()" id="toggleJsonBtn" style="padding:4px 12px;font-size:0.7rem;height:28px;">🔽 Toggle JSON View</button>
+                </div>
+            </div>
+            <div class="card-body" id="jsonBody" style="padding:14px;">
+                <pre id="jsonViewer" style="margin:0;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:#a5f3fc;background:#090d16;padding:16px;border-radius:8px;overflow-x:auto;max-height:360px;border:1px solid rgba(6,182,212,0.25);white-space:pre-wrap;word-break:break-word;">Waiting for scan response...</pre>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <!-- Stats -->
+            <div class="card">
+                <div class="card-body" style="padding:14px 16px;">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="hazardCount">0</div>
+                            <div class="stat-label">Hazards</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="scanCount">0</div>
+                            <div class="stat-label">Scans</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="workerCount">0</div>
+                            <div class="stat-label">Workers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio Alert -->
+            <div class="card audio-panel">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="icon">🔊</span> Audio Alert
+                    </div>
+                    <button class="btn btn-secondary btn-icon" onclick="speakAlert()" id="speakBtn" title="Replay Audio" style="width:32px;height:32px;font-size:0.75rem;">
+                        🔈
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="audio-text" id="audioText">
+                        <span style="color:var(--text-muted);font-style:italic;font-weight:400;">No active alerts</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Detected Hazards -->
+            <div class="card" style="flex:1;">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="icon">⚠️</span> Detected Hazards
+                    </div>
+                    <span id="hazardBadge" style="font-size:0.72rem;color:var(--text-muted);">0 found</span>
+                </div>
+                <div class="card-body">
+                    <div class="hazard-list" id="hazardList">
+                        <div class="empty-state">
+                            <div class="icon">🔍</div>
+                            <p>No hazards detected yet.<br>Start scanning to begin analysis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOP Reference -->
+            <div class="card sop-panel">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="icon">📋</span> SOP Knowledge Base
+                    </div>
+                </div>
+                <div class="card-body" style="padding:14px 16px;">
+                    <!-- Always-visible SOP document chips -->
+                    <div style="margin-bottom:12px;">
+                        <div style="font-size:0.68rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">📁 Loaded Documents</div>
+                        <div style="display:flex;flex-direction:column;gap:5px;">
+                            <div class="sop-doc-chip">🏗️ crane_operations.md</div>
+                            <div class="sop-doc-chip">⚡ electrical_safety.md</div>
+                            <div class="sop-doc-chip">🪢 osha_fall_protection.md</div>
+                            <div class="sop-doc-chip">🦺 ppe_requirements.md</div>
+                            <div class="sop-doc-chip">🕳️ trench_excavation.md</div>
+                        </div>
+                    </div>
+                    <!-- Dynamic match after scan -->
+                    <div id="sopMatchedSection" style="border-top:1px solid var(--border-subtle);padding-top:12px;display:none;">
+                        <div style="font-size:0.68rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">🎯 Matched Reference</div>
+                        <div class="sop-content" id="sopContent"></div>
+                    </div>
+                    <div id="sopEmptyHint" style="color:var(--text-muted);font-size:0.78rem;font-style:italic;border-top:1px solid var(--border-subtle);padding-top:10px;">
+                        Scan to get SOP-matched recommendations.
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Alert History -->
+        <div class="card history-section">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="icon">🕐</span> Alert History
+                </div>
+                <button class="btn btn-secondary" onclick="clearHistory()" style="padding:4px 12px;font-size:0.7rem;">Clear</button>
+            </div>
+            <div class="card-body">
+                <div class="history-list" id="historyList">
+                    <div class="empty-state">
+                        <p>Alert history will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ── JavaScript ─────────────────────────────────────────── -->
+    <script>
+        // ── State ──
+        let cameraStream = null;
+        let isScanning = false;
+        let autoScanEnabled = false;
+        let autoScanInterval = null;
+        let scanCounter = 0;
+        let totalHazards = 0;
+        const alertHistory = [];
+        let lastAudioText = '';
+
+        const API_BASE = window.location.origin;
+
+        // ── DOM refs ──
+        const video = document.getElementById('cameraFeed');
+        const canvas = document.getElementById('canvasOverlay');
+        const ctx = canvas.getContext('2d');
+
+        // ── Camera ──
+        async function toggleCamera() {
+            const btn = document.getElementById('startCameraBtn');
+            if (cameraStream) {
+                stopCamera();
+                btn.innerHTML = '📷 Start Camera';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div> Starting...';
+
+            try {
+                cameraStream = await navigator.mediaDevices.getUserMedia({
+                    video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: 'environment' }
+                });
+                video.srcObject = cameraStream;
+                await video.play();
+
+                document.getElementById('liveBadge').style.display = 'block';
+                document.getElementById('scanBtn').disabled = false;
+                document.getElementById('autoScanBtn').disabled = false;
+                btn.innerHTML = '⏹ Stop Camera';
+                btn.disabled = false;
+
+                updateConnectionStatus(true);
+                startFPSCounter();
+            } catch (e) {
+                console.error('Camera error:', e);
+                btn.innerHTML = '📷 Start Camera';
+                btn.disabled = false;
+                alert('Could not access camera: ' + e.message);
+            }
+        }
+
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(t => t.stop());
+                cameraStream = null;
+            }
+            video.srcObject = null;
+            document.getElementById('liveBadge').style.display = 'none';
+            document.getElementById('scanBtn').disabled = true;
+            document.getElementById('autoScanBtn').disabled = true;
+            if (autoScanEnabled) toggleAutoScan();
+            updateConnectionStatus(false);
+        }
+
+        // ── FPS Counter ──
+        let frameCount = 0;
+        function startFPSCounter() {
+            setInterval(() => {
+                document.getElementById('fpsBadge').textContent = frameCount + ' FPS';
+                frameCount = 0;
+            }, 1000);
+
+            function countFrames() {
+                if (cameraStream) {
+                    frameCount++;
+                    requestAnimationFrame(countFrames);
+                }
+            }
+            requestAnimationFrame(countFrames);
+        }
+
+        // ── Single Scan ──
+        async function singleScan() {
+            if (isScanning || !cameraStream) return;
+
+            isScanning = true;
+            const scanBtn = document.getElementById('scanBtn');
+            scanBtn.disabled = true;
+            scanBtn.innerHTML = '<div class="spinner"></div> Analyzing...';
+            document.getElementById('videoSection').classList.add('scanning');
+
+            try {
+                // Capture frame
+                const captureCanvas = document.createElement('canvas');
+                captureCanvas.width = video.videoWidth;
+                captureCanvas.height = video.videoHeight;
+                captureCanvas.getContext('2d').drawImage(video, 0, 0);
+
+                const blob = await new Promise(r => captureCanvas.toBlob(r, 'image/jpeg', 0.85));
+                const formData = new FormData();
+                formData.append('image', blob, 'frame.jpg');
+
+                // Attach worker query if present
+                const workerQuery = document.getElementById('workerQueryInput')?.value.trim();
+                if (workerQuery) {
+                    formData.append('worker_query', workerQuery);
+                }
+
+                const start = performance.now();
+                const resp = await fetch(`${API_BASE}/api/detect`, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!resp.ok) {
+                    const err = await resp.json();
+                    throw new Error(err.detail || 'Detection failed');
+                }
+
+                const result = await resp.json();
+                const clientTime = Math.round(performance.now() - start);
+
+                scanCounter++;
+                document.getElementById('scanCount').textContent = scanCounter;
+                document.getElementById('frameCounter').textContent = `Frame: ${scanCounter}`;
+
+                updateUI(result, clientTime);
+
+            } catch (e) {
+                console.error('Scan error:', e);
+                updateSeverityBanner('none', 'Scan Error', e.message);
+            } finally {
+                isScanning = false;
+                scanBtn.disabled = false;
+                scanBtn.innerHTML = '🔍 Scan Now';
+                document.getElementById('videoSection').classList.remove('scanning');
+            }
+        }
+
+        // ── Query input helpers ──
+        function onQueryInput() {
+            const val = document.getElementById('workerQueryInput').value.trim();
+            const clearBtn = document.getElementById('queryClearBtn');
+            const activeBadge = document.getElementById('queryActiveBadge');
+            clearBtn.style.display = val ? 'block' : 'none';
+            activeBadge.style.display = val ? 'inline-flex' : 'none';
+        }
+
+        function clearQuery() {
+            document.getElementById('workerQueryInput').value = '';
+            onQueryInput();
+            document.getElementById('workerQueryInput').focus();
+        }
+
+        // ── Auto Scan ──
+        function toggleAutoScan() {
+            autoScanEnabled = !autoScanEnabled;
+            const btn = document.getElementById('autoScanBtn');
+
+            if (autoScanEnabled) {
+                btn.style.background = 'var(--accent-orange)';
+                btn.style.color = 'white';
+                btn.title = 'Auto-Scan ON (click to stop)';
+                autoScanInterval = setInterval(() => {
+                    if (!isScanning) singleScan();
+                }, 5000);
+            } else {
+                btn.style.background = '';
+                btn.style.color = '';
+                btn.title = 'Toggle Auto-Scan';
+                clearInterval(autoScanInterval);
+                autoScanInterval = null;
+            }
+        }
+
+        // ── Update UI ──
+        function updateUI(result, clientTime) {
+            const severity = (result.severity_level || 'NONE').toLowerCase();
+            const hazardDetected = result.hazard_detected;
+
+            // Severity banner
+            const icons = { critical: '🚨', warning: '⚠️', info: 'ℹ️', none: '✅' };
+            const titles = {
+                critical: 'CRITICAL — Immediate Danger',
+                warning: 'WARNING — Safety Breach Detected',
+                info: 'INFO — Guidance Available',
+                none: 'All Clear — No Hazards Detected',
+            };
+            const descs = {
+                critical: result.audio_alert_text || result.scene_description || 'Life-threatening hazard detected.',
+                warning: result.scene_description || 'Non-critical safety issue found.',
+                info: result.scene_description || 'Operational guidance available.',
+                none: result.scene_description || 'Construction site appears safe.',
+            };
+
+            updateSeverityBanner(severity, titles[severity], descs[severity]);
+
+            // Timing
+            const procTime = result.processing_time_ms || clientTime;
+            document.getElementById('procTime').textContent = procTime + 'ms';
+            document.getElementById('severityTime').textContent = new Date().toLocaleTimeString();
+
+            // Audio text
+            const audioEl = document.getElementById('audioText');
+            if (result.audio_alert_text) {
+                audioEl.textContent = result.audio_alert_text;
+                lastAudioText = result.audio_alert_text;
+                if (severity === 'critical' || severity === 'warning') {
+                    speakAlert();
+                }
+            } else {
+                audioEl.innerHTML = '<span style="color:var(--text-muted);font-style:italic;">No active alerts</span>';
+            }
+
+            // Hazard list
+            const hazards = result.hazards_detail || [];
+            totalHazards += hazards.length;
+            document.getElementById('hazardCount').textContent = totalHazards;
+            document.getElementById('workerCount').textContent = result.worker_count || 0;
+            document.getElementById('hazardBadge').textContent = hazards.length + ' found';
+
+            const listEl = document.getElementById('hazardList');
+            if (hazards.length > 0) {
+                listEl.innerHTML = hazards.map(h => `
+                    <div class="hazard-item ${(h.severity || 'info').toLowerCase()}">
+                        <div class="hazard-item-header">
+                            <span class="hazard-item-type">${h.type || 'Unknown'}</span>
+                            <span class="hazard-item-severity ${(h.severity || 'info').toLowerCase()}">${h.severity || 'INFO'}</span>
+                        </div>
+                        <div class="hazard-item-desc">${h.description || 'No description'}</div>
+                        <div class="hazard-item-location">📍 ${h.location || 'Unknown location'}</div>
+                    </div>
+                `).join('');
+            } else {
+                listEl.innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>No hazards detected.</p></div>';
+            }
+
+            // Scene Description & Decision Reasoning
+            const sceneDescEl = document.getElementById('sceneDescText');
+            if (sceneDescEl) {
+                sceneDescEl.textContent = result.scene_description || 'No scene description available.';
+            }
+
+            const rawModelRespEl = document.getElementById('rawModelResponseText');
+            if (rawModelRespEl) {
+                rawModelRespEl.textContent = result.raw_model_response || result.scene_description || 'No raw reasoning text returned.';
+            }
+
+            const decisionBadgeEl = document.getElementById('decisionBadge');
+            if (decisionBadgeEl) {
+                decisionBadgeEl.textContent = `DECISION: ${result.decision || 'NONE'}`;
+            }
+
+            const reasoningEl = document.getElementById('decisionReasoningText');
+            if (reasoningEl) {
+                const latency = result.rule_engine_latency_ms ? ` (${result.rule_engine_latency_ms}ms)` : '';
+                reasoningEl.textContent = (result.decision_reasoning || 'Rule engine evaluated visual scene and RAG context.') + latency;
+            }
+
+            // Raw JSON Viewer
+            const jsonViewerEl = document.getElementById('jsonViewer');
+            if (jsonViewerEl) {
+                jsonViewerEl.textContent = JSON.stringify(result, null, 2);
+            }
+
+            // SOP / Recommended Action
+            const sopEl = document.getElementById('sopContent');
+            const sopMatchedSection = document.getElementById('sopMatchedSection');
+            const sopEmptyHint = document.getElementById('sopEmptyHint');
+            if (sopEl) {
+                let sopHtml = '';
+                const hasContent = result.sop_reference || result.recommended_action;
+                if (hasContent) {
+                    sopMatchedSection.style.display = 'block';
+                    sopEmptyHint.style.display = 'none';
+                    if (result.sop_reference) {
+                        sopHtml += `<div style="font-size:0.72rem;font-weight:600;color:var(--accent-cyan);margin-bottom:8px;font-family:'JetBrains Mono',monospace;">📋 ${result.sop_reference}</div>`;
+                    }
+                    if (result.recommended_action) {
+                        sopHtml += `<div style="font-size:0.8rem;color:var(--text-secondary);white-space:pre-line;line-height:1.6;">${result.recommended_action}</div>`;
+                    }
+                } else {
+                    sopMatchedSection.style.display = 'none';
+                    sopEmptyHint.style.display = 'block';
+                }
+                sopEl.innerHTML = sopHtml;
+            }
+
+            // Alert history
+            addToHistory({
+                severity: severity,
+                type: result.hazard_type || 'General',
+                text: result.audio_alert_text || result.scene_description || 'Scan complete',
+                time: new Date().toLocaleTimeString(),
+            });
+        }
+
+        function toggleJsonView() {
+            const body = document.getElementById('jsonBody');
+            const btn = document.getElementById('toggleJsonBtn');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                btn.textContent = '🔼 Collapse JSON';
+            } else {
+                body.style.display = 'none';
+                btn.textContent = '🔽 Toggle JSON View';
+            }
+        }
+
+        function copyRawJson() {
+            const jsonText = document.getElementById('jsonViewer').textContent;
+            navigator.clipboard.writeText(jsonText).then(() => {
+                alert('Full API Response JSON copied to clipboard!');
+            }).catch(e => {
+                console.error('Copy failed:', e);
+            });
+        }
+
+        function updateSeverityBanner(level, title, desc) {
+            const banner = document.getElementById('severityBanner');
+            banner.className = `severity-banner ${level}`;
+
+            const icons = { critical: '🚨', warning: '⚠️', info: 'ℹ️', none: '✅' };
+            document.getElementById('severityIcon').textContent = icons[level] || '🛡️';
+            document.getElementById('severityTitle').textContent = title;
+            document.getElementById('severityDesc').textContent = desc;
+        }
+
+        // ── TTS ──
+        function speakAlert() {
+            if (!lastAudioText || !('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(lastAudioText);
+            utter.rate = 1.1;
+            utter.pitch = 0.9;
+            utter.volume = 1;
+            window.speechSynthesis.speak(utter);
+        }
+
+        // ── History ──
+        function addToHistory(item) {
+            alertHistory.unshift(item);
+            if (alertHistory.length > 50) alertHistory.pop();
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const el = document.getElementById('historyList');
+            if (alertHistory.length === 0) {
+                el.innerHTML = '<div class="empty-state"><p>Alert history will appear here.</p></div>';
+                return;
+            }
+            el.innerHTML = alertHistory.slice(0, 20).map(h => `
+                <div class="history-item">
+                    <div class="history-dot ${h.severity}"></div>
+                    <div class="history-content">
+                        <div class="title">${h.type}</div>
+                        <div class="desc" style="white-space:normal;word-break:break-word;">${h.text}</div>
+                    </div>
+                    <div class="history-time">${h.time}</div>
+                </div>
+            `).join('');
+        }
+
+        function clearHistory() {
+            alertHistory.length = 0;
+            renderHistory();
+        }
+
+        // ── Connection Status ──
+        function updateConnectionStatus(connected) {
+            const badge = document.getElementById('connectionBadge');
+            const text = document.getElementById('connectionText');
+            badge.className = `connection-badge ${connected ? 'connected' : 'disconnected'}`;
+            text.textContent = connected ? 'Live' : 'Offline';
+        }
+
+        // ── Fullscreen ──
+        function toggleFullscreen() {
+            const el = document.getElementById('videoWrapper');
+            if (!document.fullscreenElement) {
+                el.requestFullscreen?.();
+            } else {
+                document.exitFullscreen?.();
+            }
+        }
+
+        // ── Init: fetch backend info ──
+        (async function init() {
+            try {
+                const resp = await fetch(`${API_BASE}/health`);
+                const data = await resp.json();
+                document.getElementById('backendBadge').textContent = `VLM: ${data.vlm_backend}`;
+                updateConnectionStatus(true);
+                // Switch back to offline after initial check — will go live when camera starts
+                setTimeout(() => {
+                    if (!cameraStream) updateConnectionStatus(false);
+                }, 2000);
+            } catch {
+                document.getElementById('backendBadge').textContent = 'VLM: offline';
+            }
+        })();
+    </script>
+</body>
+</html>
